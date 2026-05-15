@@ -5,7 +5,7 @@ public class Position
     public final int x;
     public final int y;
 
-    public Position(final String movement) throws Exception
+    public Position(String movement) throws Exception
     {        
         if (movement.length() != 2 || !Character.isAlphabetic(movement.charAt(0)) || !Character.isDigit(movement.charAt(1)))
         {
@@ -16,8 +16,8 @@ public class Position
         this.x = Character.toLowerCase(movement.charAt(0)) - 'a';
         this.y = Character.toLowerCase(movement.charAt(0)) - '1';
 
-        final int X_SIZE = 8;
-        final int Y_SIZE = 8;
+        int X_SIZE = 8;
+        int Y_SIZE = 8;
         if ((x < 0 || x >= X_SIZE) || (y < 0 || y >= Y_SIZE))
         {
             throw new Exception("Invalid movement position");

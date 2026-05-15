@@ -7,7 +7,7 @@ class Bishop extends Piece.Base
         super(team);
     }
 
-    public Piece.Base.Status canMove(Utils.Position sourcePosition, Utils.Position destinationPosition, final Piece.Base[][] board)
+    public Piece.Base.Status canMove(Utils.Position sourcePosition, Utils.Position destinationPosition, Piece.Base[][] board)
     {
         if (Piece.Base.doesFailBasicChecks(sourcePosition, destinationPosition, board))
         {
@@ -35,7 +35,6 @@ class Bishop extends Piece.Base
             y += yStep;
         }
 
-        // Checking if it's a basic movement or a kill.
-        return board[destinationPosition.y][destinationPosition.x] == null ? Piece.Base.Status.MOVE : Piece.Base.Status.KILL;
+        return Piece.Base.getMoveOrKillStatus(destinationPosition, board);
     }
 }

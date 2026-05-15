@@ -1,5 +1,7 @@
 package Piece;
 
+// The nights are getting darker and darker.
+
 abstract class Base 
 {
     enum Team 
@@ -21,19 +23,19 @@ abstract class Base
         this.team = team;
     }
 
-    public static boolean doesFailBasicChecks(Utils.Position sourcePosition, Utils.Position destinationPosition, final Piece.Base[][] board)
+    public static boolean doesFailBasicChecks(Utils.Position sourcePosition, Utils.Position destinationPosition, Piece.Base[][] board)
     {
-        // Checking if I move to the same place.
+        // Checking if the piece move to the same place.
         if (sourcePosition.x == destinationPosition.x && sourcePosition.y == destinationPosition.y)
         {
             return true;
         }
-        // Checking if I move an empty square. 
+        // Checking if the piece move to an empty place. 
         if (board[sourcePosition.y][sourcePosition.x] == null)
         {
             return true;
         }
-        // Checking if I commit friendly fire?
+        // Checking if the piece commit friendly fire?
         if (board[destinationPosition.y][destinationPosition.x] != null && 
             board[sourcePosition.y][sourcePosition.x].team == board[destinationPosition.y][destinationPosition.x].team)
         {
@@ -42,5 +44,9 @@ abstract class Base
 
         return false;
     }
-    public abstract Piece.Base.Status canMove(Utils.Position sourcePosition, Utils.Position destinationPosition, final Piece.Base[][] board);
+    public static Piece.Base.Status getMoveOrKillStatus(Utils.Position destinationPosition, Piece.Base[][] board)
+    {
+        return board[destinationPosition.y][destinationPosition.x] == null ? Piece.Base.Status.MOVE : Piece.Base.Status.KILL;
+    }
+    public abstract Piece.Base.Status canMove(Utils.Position sourcePosition, Utils.Position destinationPosition, Piece.Base[][] board);
 }
